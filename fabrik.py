@@ -54,8 +54,8 @@ class Chain:
         # print(mag, total_length)
         return total_length >= mag
     def validateAngles(self, angle): #helper function to make sure all angles are legal before sending it off to destroy the robot arm
-        if angle > 180:
-            return 180
+        if angle > 200:
+            return 200
         elif angle < 0:
             return 0
         else:

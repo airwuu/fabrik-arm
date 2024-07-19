@@ -7,9 +7,8 @@ from fabrik import *
 import serial
 import serial.tools.list_ports
 
-serialport = serial.Serial('/dev/ttyACM1', 9600)
+serialport = serial.Serial('/dev/ttyACM0', 9600, write_timeout=0)
 serialport.timeout = 1
-write_timeout = 0
 
 arm = Chain()
 
@@ -79,7 +78,7 @@ def extract_coords(filename='coords.csv'):
 
 #matplotlib madness begins here
 
-init_jaw = 30 #jaw
+init_jaw = 60 #jaw
 init_turn = 90 #turn
 init_twist = 90
 
@@ -88,7 +87,7 @@ y_coords = [100,200,300,400]
 
 fig, ax = plt.subplots()
 plt.get_current_fig_manager().set_window_title('Airs Robot Arm Control')
-ax.set_xlim(-200, 500)
+ax.set_xlim(-200, 400)
 ax.set_ylim(-300, 500)
 
 # areate and plot draggable goal/point
@@ -114,8 +113,8 @@ axamp = fig.add_axes([0.12, 0.25, 0.0225, 0.63])
 jaw_slider = Slider(
     ax=axamp,
     label="Jaw",
-    valmin=5,
-    valmax=69,
+    valmin=30,
+    valmax=90,
     valinit=init_jaw,
     orientation="vertical"
 )
@@ -192,5 +191,5 @@ button.on_clicked(reset)
 # button.on_clicked(reset)
 
 #loop animation
-ani = FuncAnimation(fig, update, frames=range(10), interval=50)
+ani = FuncAnimation(fig, update, frames=range(10), interval=100)
 plt.show()

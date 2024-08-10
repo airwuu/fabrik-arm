@@ -2,9 +2,6 @@ import numpy as np
 import csv
 
 def update_coords(vectors, filename='coords.csv'):
-    """
-    Converts an array of Vector objects to a CSV file.
-    """
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['x', 'y'])  # Write the header
@@ -62,7 +59,7 @@ class Chain:
             return angle
 
     def calculateAngles(self):
-        # A kind of dumb way to calculate absolute angles for each motor
+        # A kind of dumb way to calculate absolute angles for each motor, should probably loop through this in a later version
         absolute_angles = [0,0,0]
         unit_vector1 = (self.p1 - self.p0).unit()
         absolute_angles[0]= int(((np.arctan2(unit_vector1.gety(), unit_vector1.getx())*180/np.pi)))
